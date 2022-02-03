@@ -16,13 +16,19 @@ public class q4 implements Runnable {
 
     public void run() {
         try {
-            // pw = new PrintWriter(new BufferedWriter(new FileWriter("output.txt")));
-            // sc = new FastScanner(new BufferedReader(new FileReader("input.txt")));
-            pw = new PrintWriter(System.out);
-            sc = new FastScanner(new BufferedReader(new InputStreamReader(System.in)));
+            boolean isSumitting = true;
+            // isSumitting = false;
+            if (isSumitting) {
+                pw = new PrintWriter(System.out);
+                sc = new FastScanner(new BufferedReader(new InputStreamReader(System.in)));
+            } else {
+                pw = new PrintWriter(new BufferedWriter(new FileWriter("output.txt")));
+                sc = new FastScanner(new BufferedReader(new FileReader("input.txt")));
+            }
         } catch (Exception e) {
             throw new RuntimeException();
         }
+
         int t = sc.nextInt();
         // int t = 1;
         while (t-- > 0) {
@@ -34,33 +40,37 @@ public class q4 implements Runnable {
     }
 
     public long mod = 1_000_000_007;
-
+    private long[][] dp;
     public void solve() {
         int n = sc.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
-        HashSet<Integer> set = new HashSet<>();
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            if (arr[i] <= n && !set.contains(arr[i])) {
-                set.add(arr[i]);
-            } else {
-                pq.add(arr[i]);
-                count++;
-            }
+        int q = sc.nextInt();
+        long arr[] = new long[n];
+        for (int i = 0; i < n; i++) arr[i] = sc.nextLong();
+        dp = new long[n + 1][2];
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = -1l;
+            dp[i][1] = -1l;
         }
-        for (int i = 1; i <= n; i++) {
-            if (set.contains(i)) continue;
-            int temp = pq.poll();
-            if (((temp) % (temp - i)) != i) {
-                pw.println(-1);
-                return;
-            }
-        }
-        pw.println(count);
+        pw.println(helper(0, arr, 1));
+        // for (int i = 0; i < n; i++) {
+        //     System.out.println(dp[i][0] + " " + dp[i][1]);
+        // }
     }
-
+    private long helper(int pos, long[] arr, int add) {
+        // System.out.println("Calculating for pos=" + pos);
+        if (pos == arr.length) return 0;
+        if (dp[pos][add] != -1) {
+            return dp[pos][add];
+        }
+        long ans1 = helper(pos + 1, arr, add);
+        // System.out.println("ans1=" + ans1);
+        if (add == 1) {
+            ans1 = Math.max(ans1, arr[pos] + helper(pos + 1, arr, 0));
+        } else {
+            ans1 = Math.max(ans1, helper(pos + 1, arr, 1) - arr[pos]);
+        }
+        return dp[pos][add] = ans1;
+    }
     class FastScanner {
         private BufferedReader reader = null;
         private StringTokenizer tokenizer = null;
@@ -131,8 +141,96 @@ public class q4 implements Runnable {
             }
             return a;
         }
-
     }
+
+
+
+    private static class Sorter {
+        public static <T extends Comparable<? super T>> void sort(T[] arr) {
+            Arrays.sort(arr);
+        }
+        public static <T> void sort(T[] arr, Comparator<T> c) {
+            Arrays.sort(arr, c);
+        }
+        public static <T> void sort(T[][] arr, Comparator<T[]> c) {
+            Arrays.sort(arr, c);
+        }
+        public static <T extends Comparable<? super T>> void sort(ArrayList<T> arr) {
+            Collections.sort(arr);
+        }
+        public static <T> void sort(ArrayList<T> arr, Comparator<T> c) {
+            Collections.sort(arr, c);
+        }
+        public static void normalSort(int[] arr) {
+            Arrays.sort(arr);
+        }
+        public static void normalSort(long[] arr) {
+            Arrays.sort(arr);
+        }
+        public static void sort(int[] arr) {
+            timSort(arr);
+        }
+        public static void sort(int[] arr, Comparator<Integer> c) {
+            timSort(arr, c);
+        }
+        public static void sort(int[][] arr, Comparator<Integer[]> c) {
+            timSort(arr, c);
+        }
+        public static void sort(long[] arr) {
+            timSort(arr);
+        }
+        public static void sort(long[] arr, Comparator<Long> c) {
+            timSort(arr, c);
+        }
+        public static void sort(long[][] arr, Comparator<Long[]> c) {
+            timSort(arr, c);
+        }
+        private static void timSort(int[] arr) {
+            Integer[] temp = new Integer[arr.length];
+            for (int i = 0; i < arr.length; i++) temp[i] = arr[i];
+            Arrays.sort(temp);
+            for (int i = 0; i < arr.length; i++) arr[i] = temp[i];
+        }
+        private static void timSort(int[] arr, Comparator<Integer> c) {
+            Integer[] temp = new Integer[arr.length];
+            for (int i = 0; i < arr.length; i++) temp[i] = arr[i];
+            Arrays.sort(temp, c);
+            for (int i = 0; i < arr.length; i++) arr[i] = temp[i];
+        }
+        private static void timSort(int[][] arr, Comparator<Integer[]> c) {
+            Integer[][] temp = new Integer[arr.length][arr[0].length];
+            for (int i = 0; i < arr.length; i++)
+                for (int j = 0; j < arr[0].length; j++)
+                    temp[i][j] = arr[i][j];
+            Arrays.sort(temp, c);
+            for (int i = 0; i < arr.length; i++)
+                for (int j = 0; j < arr[0].length; j++)
+                    temp[i][j] = arr[i][j];
+        }
+        private static void timSort(long[] arr) {
+            Long[] temp = new Long[arr.length];
+            for (int i = 0; i < arr.length; i++) temp[i] = arr[i];
+            Arrays.sort(temp);
+            for (int i = 0; i < arr.length; i++) arr[i] = temp[i];
+        }
+        private static void timSort(long[] arr, Comparator<Long> c) {
+            Long[] temp = new Long[arr.length];
+            for (int i = 0; i < arr.length; i++) temp[i] = arr[i];
+            Arrays.sort(temp, c);
+            for (int i = 0; i < arr.length; i++) arr[i] = temp[i];
+        }
+        private static void timSort(long[][] arr, Comparator<Long[]> c) {
+            Long[][] temp = new Long[arr.length][arr[0].length];
+            for (int i = 0; i < arr.length; i++)
+                for (int j = 0; j < arr[0].length; j++)
+                    temp[i][j] = arr[i][j];
+            Arrays.sort(temp, c);
+            for (int i = 0; i < arr.length; i++)
+                for (int j = 0; j < arr[0].length; j++)
+                    temp[i][j] = arr[i][j];
+        }
+    }
+
 
     public long fastPow(long x, long y, long mod) {
         if (y == 0) return 1;
