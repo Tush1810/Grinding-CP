@@ -1,5 +1,6 @@
-* https://codeforces.com/contest/1624/problem/D
+* https://codeforces.com/problemset/problem/1534/C
 * Solved on my own :)
-* level - 1400
-* Tags - Binary Search, Greedy
-* Time Complexity - O(klogn)
+* Need more practice with this level of problem because i am taking lots of time
+* level - 1200
+* Tags - Cycle detection
+* Time Complexity - O(n)
