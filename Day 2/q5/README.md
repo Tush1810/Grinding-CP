@@ -1,6 +1,5 @@
-* https://codeforces.com/problemset/problem/1615/B
+* https://www.interviewbit.com/problems/partitions/
 * Solved on my own :)
-* level - 1300
-* I need to work upon more problems of the same level ;(
-* Tags - Greedy
+* level - medium
+* Tags - prefix/suffix
 * Time Complexity - O(n)
