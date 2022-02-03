@@ -1,5 +1,5 @@
-* https://codeforces.com/problemset/problem/1619/C
+* https://codeforces.com/contest/1598/problem/C
 * Solved on my own :)
 * level - 1200
 * Tags - Greedy
-* Time Complexity - O(|s|)
+* Time Complexity - O(n * log(n))
