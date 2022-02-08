@@ -6,5 +6,9 @@
 * Very unclean code.
 * I need more practice with such type of problems..oooof
 * level - 1400
-* tags - String,greedy
-* time complexity - O(n)
+
+* approach 1 tags - Strings,greedy,2 pointer
+* approach 1 time complexity - O(n)
+
+* approach 2 tags - Strings,dp
+* approach 2 time complexity - O(n)
