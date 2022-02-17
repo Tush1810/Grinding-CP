@@ -1,4 +1,4 @@
-* https://codeforces.com/contest/1637/problem/C
+* https://codeforces.com/contest/1638/problem/C
 * Hard to think
 * Easy to implement if the problem is understood
 * Could not solve on my own :,(
