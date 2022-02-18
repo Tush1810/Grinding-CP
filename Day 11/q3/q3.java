@@ -17,7 +17,7 @@ public class q3 implements Runnable {
     public void run() {
         try {
             boolean isSumitting = true;
-            // isSumitting = false;
+            //isSumitting = false;
             if (isSumitting) {
                 pw = new PrintWriter(System.out);
                 sc = new FastScanner(new BufferedReader(new InputStreamReader(System.in)));
@@ -39,55 +39,6 @@ public class q3 implements Runnable {
         pw.close();
     }
 
-    private class Graph {
-        private class Node {
-            int data;
-            ArrayList<Node> edge;
-            Node(int data) {
-                this.data = data;
-                edge = new ArrayList<>();
-            }
-            public void addEdge(Node a2) {
-                edge.add(a2);
-            }
-        }
-        HashMap<Integer, Node> memo;
-        Graph() {
-            memo = new HashMap<Integer, Node>();
-        }
-
-        private void addNode(int data) {
-            memo.put(data, new Node(data));
-        }
-
-        private void addEdge(int a1, int a2) {
-            memo.get(a1).addEdge(memo.get(a2));
-            memo.get(a2).addEdge(memo.get(a1));
-        }
-
-        public int countConnected(int n) {
-            boolean isDone[] = new boolean[n + 1];
-            ArrayDeque<Integer> arr = new ArrayDeque<Integer>();
-            int count = 0;
-            for (int i = 1; i <= n; i++) {
-                if (!isDone[i]) {
-                    count++;
-                    dfs(memo.get(i), isDone);
-                }
-            }
-            return count;
-        }
-
-        private void dfs(Node n, boolean[] isDone) {
-            if (!isDone[n.data]) {
-                isDone[n.data] = true;
-                for (Node temp : n.edge) {
-                    dfs(temp, isDone);
-                }
-            }
-        }
-    }
-
     public long mod = 1_000_000_007;
     private class Pair {
         long first, second;
@@ -97,29 +48,22 @@ public class q3 implements Runnable {
         }
     }
 
-    private int count;
-    private Graph g;
-
     public void solve() {
-        count = 0;
         int n = sc.nextInt();
-        int[] arr = new int[n];
+        Stack<Integer> stack = new Stack<Integer>();
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
-        g = new Graph();
-        for (int i = 1; i <= n; i++) {
-            g.addNode(i);
-        }
-        TreeSet<Integer> set = new TreeSet<Integer>();
-        for (int i = 0; i < n; i++) {
-            set.add(arr[i]);
-            Integer temp = set.higher(arr[i]);
-            if (temp != null) {
-                g.addEdge(temp, arr[i]);
+            int temp = sc.nextInt();
+            if (stack.empty() || stack.peek() < temp) {
+                stack.push(temp);
+            } else {
+                int max = stack.pop();
+                while (!stack.empty() && stack.peek() > temp) {
+                    stack.pop();
+                }
+                stack.push(max);
             }
         }
-        pw.println(g.countConnected(n));
+        pw.println(stack.size());
     }
 
 
