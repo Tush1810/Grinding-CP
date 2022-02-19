@@ -42,7 +42,19 @@ public class q4 implements Runnable {
     public long mod = 1_000_000_007;
 
     public void solve() {
-
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        int min = 1_000_000_000;
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+            min = Math.min(arr[i], min);
+        }
+        for (int i = 0, count = 0; i < n && count < (int)Math.floor(((double)n) / 2); i++) {
+            if (arr[i] != min) {
+                pw.println(arr[i] + " " + min);
+                count++;
+            }
+        }
     }
 
 
