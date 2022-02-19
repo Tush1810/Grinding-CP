@@ -5,6 +5,6 @@
 * learnt about the concept of dsu
 * Still so much to learn !
 * Good problem
-* level - unknown
+* level - 1300
 * Tags - dsu,graphs,math
 * time complexity - O(n)
