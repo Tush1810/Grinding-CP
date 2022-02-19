@@ -1,6 +1,5 @@
-* https://codeforces.com/contest/1613/problem/B
-* Hard to interpret the problem statement
-* If problem statement interpretted correctly, then easy
-* level - 1000
-* Tags - greedy,sortings
+* https://codeforces.com/problemset/problem/1594/C
+* Good problem
+* level - 1200
+* Tags - greedy,strings
 * time complexity - O(n)
